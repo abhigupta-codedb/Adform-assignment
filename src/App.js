@@ -1,23 +1,146 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import Campaign from "./components/Campaign";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "./store/campaignSlice";
+import { STATUS } from "./constant";
 
 function App() {
+  const apiData = [
+    {
+      id: "1",
+      name: "Divavu",
+      startDate: "9/19/2017",
+      endDate: "3/9/2018",
+      Budget: 88377,
+      userId: "3",
+    },
+    {
+      id: 2,
+      name: "Jaxspan",
+      startDate: "11/21/2017",
+      endDate: "2/21/2018",
+      Budget: 608715,
+      userId: 6,
+    },
+    {
+      id: 3,
+      name: "Miboo",
+      startDate: "11/1/2017",
+      endDate: "6/20/2017",
+      Budget: 239507,
+      userId: 7,
+    },
+    {
+      id: 4,
+      name: "Trilith",
+      startDate: "8/25/2017",
+      endDate: "11/30/2023",
+      Budget: 179838,
+      userId: 1,
+    },
+    {
+      id: 5,
+      name: "Layo",
+      startDate: "11/28/2017",
+      endDate: "3/10/2018",
+      Budget: 837850,
+      userId: 9,
+    },
+    {
+      id: 6,
+      name: "Photojam",
+      startDate: "7/25/2017",
+      endDate: "6/23/2017",
+      Budget: 858131,
+      userId: 3,
+    },
+    {
+      id: 7,
+      name: "Blogtag",
+      startDate: "6/27/2017",
+      endDate: "1/15/2018",
+      Budget: 109078,
+      userId: 2,
+    },
+    {
+      id: 8,
+      name: "Rhyzio",
+      startDate: "10/13/2017",
+      endDate: "1/25/2024",
+      Budget: 272552,
+      userId: 4,
+    },
+    {
+      id: 9,
+      name: "Zoomcast",
+      startDate: "9/6/2017",
+      endDate: "11/10/2024",
+      Budget: 301919,
+      userId: 8,
+    },
+    {
+      id: 10,
+      name: "Realbridge",
+      startDate: "3/5/2018",
+      endDate: "10/2/2023",
+      Budget: 505602,
+      userId: 5,
+    },
+  ];
+
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.campaign.data);
+  const status = useSelector((state) => state.campaign.status);
+  const [getData, setData] = useState(apiData);
+
+  console.log("products", products);
+  console.log("status", status);
+  useEffect(() => {
+    dispatch(fetchData());
+  }, []);
+
+  const ApplyDateFilter = (startDate, endDate) => {
+    setData(
+      getData.filter(
+        (data) => data.startDate >= startDate && data.endDate <= endDate
+      )
+    );
+  };
+
+  const ApplyNameFilter = (name = "") => {
+    setData(getData.filter((data) => data.name.indexOf(name) >= 0));
+  };
+
+  if (status === STATUS.LOADING) {
+    return (
+      <div className="home">
+        <div className="header">
+          <h1>Loading....</h1>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === STATUS.ERROR) {
+    return (
+      <div className="home">
+        <div className="header">
+          <h1>Error Occured ....</h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="home">
+      <div className="header">
+        <Campaign
+          data={getData}
+          dateFilter={ApplyDateFilter}
+          nameFilter={ApplyNameFilter}
+        />
+      </div>
     </div>
   );
 }
