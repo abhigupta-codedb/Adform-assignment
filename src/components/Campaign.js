@@ -7,11 +7,11 @@ function Campaign({ data, dateFilter, nameFilter }) {
   const [showTable, setTable] = useState(true);
 
   const filteredData = data.map(
-    ({ name, startDate, endDate, Budget } = data, key) => {
+    ({ username, startDate, endDate, Budget } = data, key) => {
       return (
         <tr key={data.id}>
           <td>{`Campaign ${++key}`}</td>
-          <td>{name}</td>
+          <td>{username}</td>
           <td>{startDate}</td>
           <td>{endDate}</td>
           <td>
