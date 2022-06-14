@@ -26,7 +26,7 @@ export function fetchData() {
   return async function fetchDataThunk(dispatch, getState) {
     dispatch(setStatus(STATUS.LOADING));
     try {
-      const res = await fetch("https://fakestoreapi.com/products");
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
       const data = await res.json();
       dispatch(setCampaign(data));
       dispatch(setStatus(STATUS.IDLE));

@@ -4,16 +4,23 @@ import Campaign from "./components/Campaign";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./store/campaignSlice";
 import { STATUS } from "./constant";
-import { apiData } from "./apiData";
+import { normalizeTestData } from "./normalizeData";
+import { createSelector } from "reselect";
+
+const normalizeDataSelector = createSelector(
+  (state) => state.campaign.data,
+  (data) =>
+    data.map((user) => {
+      return { id: user.id, userName: user.username };
+    })
+);
 
 function App() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.campaign.data);
   const status = useSelector((state) => state.campaign.status);
-  const [getData, setData] = useState(apiData);
+  const allUsers = useSelector(normalizeDataSelector);
+  const [getData, setData] = useState(normalizeTestData(allUsers));
 
-  console.log("products", products);
-  console.log("status", status);
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
