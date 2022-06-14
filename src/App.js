@@ -16,7 +16,7 @@ function App() {
   console.log("status", status);
   useEffect(() => {
     dispatch(fetchData());
-  }, []);
+  }, [dispatch]);
 
   const ApplyDateFilter = (startDate, endDate) => {
     setData(

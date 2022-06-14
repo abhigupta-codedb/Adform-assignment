@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 
 function Campaign({ data, dateFilter, nameFilter }) {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
+  const [showTable, setTable] = useState(true);
 
   const filteredData = data.map(
     ({ name, startDate, endDate, Budget } = data, key) => {
@@ -32,6 +33,8 @@ function Campaign({ data, dateFilter, nameFilter }) {
 
     if (!startDate || !endDate) {
       alert("Enter start/end date correctly");
+    } else if (new Date(startDate) > new Date(endDate)) {
+      setTable(false);
     } else {
       dateFilter(startDate, endDate);
     }
@@ -85,7 +88,7 @@ function Campaign({ data, dateFilter, nameFilter }) {
             <th>Active</th>
             <th>Budget</th>
           </tr>
-          {filteredData}
+          {showTable && filteredData}
         </table>
       </div>
     </div>
