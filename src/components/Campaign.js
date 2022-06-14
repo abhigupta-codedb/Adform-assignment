@@ -37,17 +37,6 @@ function Campaign({ data, dateFilter, nameFilter }) {
     }
   };
 
-  const ApplyName = () => {
-    const name = document.getElementById("name").value;
-
-    nameFilter(name);
-    // if (!name) {
-    //   alert("No name entered");
-    // } else {
-    //   nameFilter(name);
-    // }
-  };
-
   return (
     <div className="App">
       <div className="search">
@@ -80,7 +69,7 @@ function Campaign({ data, dateFilter, nameFilter }) {
             <input
               placeholder="Search by name"
               id="name"
-              onChange={ApplyName}
+              onChange={(e) => nameFilter(e.target.value)}
             />
           </div>
         </div>
