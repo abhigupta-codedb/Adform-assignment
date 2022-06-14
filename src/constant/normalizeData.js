@@ -1,4 +1,4 @@
-import { apiData } from "./apiData";
+import { apiData } from "../apiData";
 
 export const normalizeTestData = (allUsers) => {
   apiData.forEach((data) => {

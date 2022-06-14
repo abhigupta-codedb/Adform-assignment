@@ -3,8 +3,8 @@ import "./App.css";
 import Campaign from "./components/Campaign";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./store/campaignSlice";
-import { STATUS } from "./constant";
-import { normalizeTestData } from "./normalizeData";
+import { STATUS } from "./constant/constant";
+import { normalizeTestData } from "./constant/normalizeData";
 import { createSelector } from "reselect";
 
 const normalizeDataSelector = createSelector(
@@ -34,7 +34,7 @@ function App() {
   };
 
   const ApplyNameFilter = (searchName = "") => {
-    setData(getData.filter((data) => data.name.indexOf(searchName) >= 0));
+    setData(getData.filter((data) => data.username.indexOf(searchName) >= 0));
   };
 
   if (status === STATUS.ERROR) {
