@@ -1,7 +1,5 @@
-import { apiData } from "../apiData";
-
-export const normalizeTestData = (allUsers) => {
-  apiData.forEach((data) => {
+export const normalizeTestData = (allUsers, Data) => {
+  Data.forEach((data) => {
     const user = allUsers.find((user) => user.id === data.id);
     if (user) {
       data.username = user.userName;
@@ -10,5 +8,5 @@ export const normalizeTestData = (allUsers) => {
     }
   });
 
-  return apiData;
+  return Data;
 };

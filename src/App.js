@@ -6,6 +6,7 @@ import { fetchData } from "./store/campaignSlice";
 import { STATUS } from "./constant/constant";
 import { normalizeTestData } from "./constant/normalizeData";
 import { createSelector } from "reselect";
+import { mockData } from "./constant/mockData";
 
 const normalizeDataSelector = createSelector(
   (state) => state.campaign.data,
@@ -19,7 +20,14 @@ function App() {
   const dispatch = useDispatch();
   const status = useSelector((state) => state.campaign.status);
   const allUsers = useSelector(normalizeDataSelector);
-  const [getData, setData] = useState(normalizeTestData(allUsers));
+  const renderData = normalizeTestData(allUsers, mockData);
+  const [getData, setData] = useState(renderData);
+
+  window.AddCampaigns = function (campaignData = mockData) {
+    console.log("provided data is", campaignData);
+    const renderData = normalizeTestData(allUsers, campaignData);
+    setData(renderData);
+  };
 
   useEffect(() => {
     dispatch(fetchData());

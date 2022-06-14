@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
+import { getFormattedDate } from "../constant/constant";
 
 function Campaign({ data, dateFilter, nameFilter }) {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
@@ -36,7 +37,7 @@ function Campaign({ data, dateFilter, nameFilter }) {
     } else if (new Date(startDate) > new Date(endDate)) {
       setTable(false);
     } else {
-      dateFilter(startDate, endDate);
+      dateFilter(getFormattedDate(startDate), getFormattedDate(endDate));
     }
   };
 
