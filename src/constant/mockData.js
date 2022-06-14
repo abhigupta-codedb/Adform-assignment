@@ -18,8 +18,8 @@ export const mockData = [
   {
     id: 3,
     name: "Miboo",
-    startDate: "11/1/2017",
-    endDate: "6/20/2017",
+    startDate: "6/20/2017",
+    endDate: "11/1/2017",
     Budget: 239507,
     userId: 7,
   },
@@ -42,8 +42,8 @@ export const mockData = [
   {
     id: 6,
     name: "Photojam",
-    startDate: "7/25/2017",
-    endDate: "6/23/2017",
+    startDate: "6/25/2017",
+    endDate: "7/23/2017",
     Budget: 858131,
     userId: 3,
   },

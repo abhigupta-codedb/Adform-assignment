@@ -23,6 +23,7 @@ function App() {
   const renderData = normalizeTestData(allUsers, mockData);
   const [getData, setData] = useState(renderData);
 
+  // Global Method
   window.AddCampaigns = function (campaignData = mockData) {
     console.log("provided data is", campaignData);
     const renderData = normalizeTestData(allUsers, campaignData);
@@ -36,7 +37,9 @@ function App() {
   const ApplyDateFilter = (startDate, endDate) => {
     setData(
       getData.filter(
-        (data) => data.startDate >= startDate && data.endDate <= endDate
+        (data) =>
+          new Date(data.startDate) >= new Date(startDate) &&
+          new Date(data.endDate) <= new Date(endDate)
       )
     );
   };
