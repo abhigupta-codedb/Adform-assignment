@@ -27,7 +27,7 @@ function App() {
   window.AddCampaigns = function (campaignData = mockData) {
     console.log("provided data is", campaignData);
     const renderData = normalizeTestData(allUsers, campaignData);
-    setData(renderData);
+    setData([...getData, ...renderData]);
   };
 
   useEffect(() => {

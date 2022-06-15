@@ -9,11 +9,11 @@ function Campaign({ data, dateFilter }) {
   const [getName, setName] = useState("");
 
   const filteredData = data
-    .filter((data) => data.username.indexOf(getName) >= 0)
-    .map(({ username, startDate, endDate, Budget } = data, key) => {
+    .filter((data) => data.name.indexOf(getName) >= 0)
+    .map(({ name, username, startDate, endDate, Budget } = data, key) => {
       return (
         <tr key={data.id}>
-          <td>{`Campaign ${++key}`}</td>
+          <td>{name}</td>
           <td>{username}</td>
           <td>{startDate}</td>
           <td>{endDate}</td>
