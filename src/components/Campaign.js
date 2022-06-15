@@ -14,7 +14,7 @@ function Campaign({ data, dateFilter }) {
     )
     .map(({ name, username, startDate, endDate, Budget } = data, key) => {
       return (
-        <tr key={data.id}>
+        <tr key={key}>
           <td>{name}</td>
           <td>{username}</td>
           <td>{startDate}</td>
