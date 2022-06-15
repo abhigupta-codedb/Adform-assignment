@@ -44,6 +44,12 @@ function Campaign({ data, dateFilter }) {
     }
   };
 
+  const setMinEndDate = (date) => {
+    if (date) {
+      document.getElementById("endDate").min = date;
+    }
+  };
+
   return (
     <div className="App">
       <div className="search">
@@ -55,6 +61,7 @@ function Campaign({ data, dateFilter }) {
               type="text"
               onFocus={(e) => {
                 e.target.type = "date";
+                setMinEndDate(e.target.value);
               }}
             />
           </div>
