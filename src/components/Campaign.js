@@ -9,7 +9,7 @@ function Campaign({ data, dateFilter }) {
   const [getName, setName] = useState("");
 
   const filteredData = data
-    .filter((data) => data.name.indexOf(getName) >= 0)
+    .filter((data) => data.name.toLowerCase().indexOf(getName) >= 0)
     .map(({ name, username, startDate, endDate, Budget } = data, key) => {
       return (
         <tr key={data.id}>
@@ -67,7 +67,7 @@ function Campaign({ data, dateFilter }) {
             />
           </div>
           <div className="search-items-date">
-            <button onClick={ApplyDate}> Apply Date</button>
+            <button onClick={ApplyDate}>Apply Date</button>
           </div>
 
           <div className="search-items-name">
