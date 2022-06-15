@@ -24,8 +24,10 @@ function App() {
   const [getData, setData] = useState(renderData);
 
   // Global Method
-  window.AddCampaigns = function (campaignData = mockData) {
-    console.log("provided data is", campaignData);
+  window.AddCampaigns = function (campaignData) {
+    if (!campaignData) {
+      throw new Error("Incorrect data provided");
+    }
     const renderData = normalizeTestData(allUsers, campaignData);
     setData([...getData, ...renderData]);
   };
