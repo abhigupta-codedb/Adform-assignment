@@ -9,7 +9,9 @@ function Campaign({ data, dateFilter }) {
   const [getName, setName] = useState("");
 
   const filteredData = data
-    .filter((data) => data.name.toLowerCase().indexOf(getName) >= 0)
+    .filter(
+      (data) => data.name.toLowerCase().indexOf(getName.toLowerCase()) >= 0
+    )
     .map(({ name, username, startDate, endDate, Budget } = data, key) => {
       return (
         <tr key={data.id}>
@@ -123,6 +125,7 @@ Campaign.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
+      username: PropTypes.string,
       startDate: PropTypes.string,
       endDate: PropTypes.string,
       Budget: PropTypes.number,
