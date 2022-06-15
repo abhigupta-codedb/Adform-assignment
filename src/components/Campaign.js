@@ -3,12 +3,14 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import { getFormattedDate } from "../constant/constant";
 
-function Campaign({ data, dateFilter, nameFilter }) {
+function Campaign({ data, dateFilter }) {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
   const [showTable, setTable] = useState(true);
+  const [getName, setName] = useState("");
 
-  const filteredData = data.map(
-    ({ username, startDate, endDate, Budget } = data, key) => {
+  const filteredData = data
+    .filter((data) => data.username.indexOf(getName) >= 0)
+    .map(({ username, startDate, endDate, Budget } = data, key) => {
       return (
         <tr key={data.id}>
           <td>{`Campaign ${++key}`}</td>
@@ -25,8 +27,7 @@ function Campaign({ data, dateFilter, nameFilter }) {
           <td>{Budget}$</td>
         </tr>
       );
-    }
-  );
+    });
 
   const ApplyDate = () => {
     const startDate = document.getElementById("startDate").value;
@@ -73,7 +74,8 @@ function Campaign({ data, dateFilter, nameFilter }) {
             <input
               placeholder="Search by name"
               id="name"
-              onChange={(e) => nameFilter(e.target.value)}
+              value={getName}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
         </div>
@@ -127,7 +129,6 @@ Campaign.propTypes = {
     })
   ).isRequired,
   dateFilter: PropTypes.func.isRequired,
-  nameFilter: PropTypes.func.isRequired,
 };
 
 export default Campaign;

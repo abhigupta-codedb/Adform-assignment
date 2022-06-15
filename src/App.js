@@ -44,10 +44,6 @@ function App() {
     );
   };
 
-  const ApplyNameFilter = (searchName = "") => {
-    setData(getData.filter((data) => data.username.indexOf(searchName) >= 0));
-  };
-
   if (status === STATUS.ERROR) {
     return (
       <div className="home">
@@ -64,11 +60,7 @@ function App() {
         {status === STATUS.LOADING ? (
           <h1>Loading....</h1>
         ) : (
-          <Campaign
-            data={getData}
-            dateFilter={ApplyDateFilter}
-            nameFilter={ApplyNameFilter}
-          />
+          <Campaign data={getData} dateFilter={ApplyDateFilter} />
         )}
       </div>
     </div>
