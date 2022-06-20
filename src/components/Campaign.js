@@ -7,6 +7,7 @@ function Campaign({ data, dateFilter }) {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
   const [showTable, setTable] = useState(true);
   const [getName, setName] = useState("");
+  const [getDate, setDate] = useState({ startDate: "", endDate: "" });
 
   const filteredData = data
     .filter(
@@ -32,8 +33,8 @@ function Campaign({ data, dateFilter }) {
     });
 
   const ApplyDate = () => {
-    const startDate = document.getElementById("startDate").value;
-    const endDate = document.getElementById("endDate").value;
+    const startDate = getDate.startDate;
+    const endDate = getDate.endDate;
 
     if (!startDate || !endDate) {
       alert("Enter start/end date correctly");
@@ -63,6 +64,12 @@ function Campaign({ data, dateFilter }) {
                 e.target.type = "date";
                 setMinEndDate(e.target.value);
               }}
+              value={getDate.startDate}
+              onChange={(e) =>
+                setDate((date) => {
+                  return { ...date, startDate: e.target.value };
+                })
+              }
             />
           </div>
           <div className="search-items-date">
@@ -73,6 +80,12 @@ function Campaign({ data, dateFilter }) {
               onFocus={(e) => {
                 e.target.type = "date";
               }}
+              value={getDate.endDate}
+              onChange={(e) =>
+                setDate((date) => {
+                  return { ...date, endDate: e.target.value };
+                })
+              }
             />
           </div>
           <div className="search-items-date">
