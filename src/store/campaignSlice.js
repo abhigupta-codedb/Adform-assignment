@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { STATUS } from "../constant/constant";
+import { STATUS } from "../constant/helpers";
 
 const CampaignSlice = createSlice({
   name: "CampaignSlice",

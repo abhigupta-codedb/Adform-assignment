@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { getFormattedDate } from "../constant/constant";
+import { getFormattedDate, formatCash } from "../constant/helpers";
 
 function Campaign({ data, dateFilter }) {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
@@ -27,7 +27,7 @@ function Campaign({ data, dateFilter }) {
               <RedLabel />
             )}
           </td>
-          <td>{Budget}$</td>
+          <td>{formatCash(Budget)} USD</td>
         </tr>
       );
     });

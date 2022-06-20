@@ -3,7 +3,7 @@ import "./App.css";
 import Campaign from "./components/Campaign";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./store/campaignSlice";
-import { STATUS } from "./constant/constant";
+import { STATUS } from "./constant/helpers";
 import { normalizeTestData } from "./constant/normalizeData";
 import { createSelector } from "reselect";
 import { mockData } from "./constant/mockData";

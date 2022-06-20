@@ -36,7 +36,7 @@ export const mockData = [
     name: "Layo",
     startDate: "11/28/2017",
     endDate: "3/10/2018",
-    Budget: 837850,
+    Budget: 1056000,
     userId: 9,
   },
   {
@@ -68,7 +68,7 @@ export const mockData = [
     name: "Zoomcast",
     startDate: "9/6/2017",
     endDate: "11/10/2024",
-    Budget: 301919,
+    Budget: 1890000000,
     userId: 8,
   },
   {
