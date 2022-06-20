@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { getFormattedDate, formatCash } from "../constant/helpers";
+import { formatCash } from "../constant/helpers";
 import { normalizeTestData } from "../store/selectors/selectors";
 
 const Campaign = ({ data, allUsers }) => {
-  const currDate = moment(new Date()).format("MM/DD/YYYY");
+  const currDate = moment().format("MM/DD/YYYY");
   const [getData, setData] = useState(data);
   const [showTable, setTable] = useState(true);
   const [getName, setName] = useState("");
@@ -32,11 +32,7 @@ const Campaign = ({ data, allUsers }) => {
           <td>{startDate}</td>
           <td>{endDate}</td>
           <td>
-            {new Date(endDate) > new Date(currDate) ? (
-              <GreenLabel />
-            ) : (
-              <RedLabel />
-            )}
+            {moment(endDate).isAfter(currDate) ? <GreenLabel /> : <RedLabel />}
           </td>
           <td>{formatCash(Budget)} USD</td>
         </tr>
@@ -44,21 +40,19 @@ const Campaign = ({ data, allUsers }) => {
     });
 
   const applyDate = () => {
-    let startDate = getDate.startDate;
-    let endDate = getDate.endDate;
+    let startDate = moment(getDate.startDate).format("MM/DD/YYYY");
+    let endDate = moment(getDate.endDate).format("MM/DD/YYYY");
 
-    if (!startDate || !endDate) {
-      alert("Enter start/end date correctly");
-    } else if (new Date(startDate) > new Date(endDate)) {
+    if (startDate === "Invalid date" || endDate === "Invalid date") {
+      alert("Invalid start/end date");
+    } else if (moment(startDate).isAfter(endDate)) {
       setTable(false);
     } else {
-      startDate = getFormattedDate(startDate);
-      endDate = getFormattedDate(endDate);
       setData(
         getData.filter(
           (data) =>
-            new Date(data.startDate) >= new Date(startDate) &&
-            new Date(data.endDate) <= new Date(endDate)
+            moment(data.startDate).isBetween(startDate, endDate) &&
+            moment(data.endDate).isBetween(startDate, endDate)
         )
       );
     }
