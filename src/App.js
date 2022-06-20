@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import Campaign from "./components/Campaign";
 import { useDispatch } from "react-redux";
-import { fetchData } from "./store/campaignSlice";
+import { fetchData } from "./store/Thunk/thunk";
 import { STATUS } from "./helpers/helpers";
 import { mockData } from "./helpers/mockData";
 import { normalizeTestData } from "./store/selectors/selectors";
