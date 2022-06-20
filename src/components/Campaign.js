@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { formatCash } from "../constant/helpers";
+import { formatCash } from "../helpers/helpers";
 import { normalizeTestData } from "../store/selectors/selectors";
+import { GetAllUsers } from "../hooks/hooks";
 
-const Campaign = ({ data, allUsers }) => {
+const Campaign = ({ data }) => {
   const currDate = moment().format("MM/DD/YYYY");
   const [getData, setData] = useState(data);
   const [showTable, setTable] = useState(true);
   const [getName, setName] = useState("");
   const [getDate, setDate] = useState({ startDate: "", endDate: "" });
+  const allUsers = GetAllUsers();
 
   // Global Method
   window.AddCampaigns = (campaignData) => {

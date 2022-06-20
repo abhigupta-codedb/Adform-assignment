@@ -1,20 +1,17 @@
 import { useEffect } from "react";
 import "./App.css";
 import Campaign from "./components/Campaign";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchData } from "./store/campaignSlice";
-import { STATUS } from "./constant/helpers";
-import { mockData } from "./constant/mockData";
-import {
-  normalizeUsersSelector,
-  normalizeTestData,
-} from "./store/selectors/selectors";
+import { STATUS } from "./helpers/helpers";
+import { mockData } from "./helpers/mockData";
+import { normalizeTestData } from "./store/selectors/selectors";
+import { GetApiStatus, GetAllUsers } from "./hooks/hooks";
 
 const App = () => {
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.campaign.status);
-  const allUsers = useSelector(normalizeUsersSelector);
-  const renderData = normalizeTestData(allUsers, mockData);
+  const status = GetApiStatus();
+  const renderData = normalizeTestData(GetAllUsers(), mockData);
 
   useEffect(() => {
     dispatch(fetchData());
@@ -36,7 +33,7 @@ const App = () => {
         {status === STATUS.LOADING ? (
           <h1>Loading....</h1>
         ) : (
-          <Campaign data={renderData} allUsers={allUsers} />
+          <Campaign data={renderData} />
         )}
       </div>
     </div>
