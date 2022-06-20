@@ -10,7 +10,7 @@ import {
   normalizeTestData,
 } from "./store/selectors/selectors";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const status = useSelector((state) => state.campaign.status);
   const allUsers = useSelector(normalizeUsersSelector);
@@ -41,6 +41,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

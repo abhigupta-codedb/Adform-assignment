@@ -22,7 +22,7 @@ export const { setCampaign, setStatus } = CampaignSlice.actions;
 export default CampaignSlice.reducer;
 
 // Thunk
-export function fetchData() {
+export const fetchData = () => {
   return async function fetchDataThunk(dispatch, getState) {
     dispatch(setStatus(STATUS.LOADING));
     try {
@@ -35,4 +35,4 @@ export function fetchData() {
       console.log(err);
     }
   };
-}
+};

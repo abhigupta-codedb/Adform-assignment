@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { getFormattedDate, formatCash } from "../constant/helpers";
 import { normalizeTestData } from "../store/selectors/selectors";
 
-function Campaign({ data, allUsers }) {
+const Campaign = ({ data, allUsers }) => {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
   const [getData, setData] = useState(data);
   const [showTable, setTable] = useState(true);
@@ -12,7 +12,7 @@ function Campaign({ data, allUsers }) {
   const [getDate, setDate] = useState({ startDate: "", endDate: "" });
 
   // Global Method
-  window.AddCampaigns = function (campaignData) {
+  window.AddCampaigns = (campaignData) => {
     if (!campaignData) {
       throw new Error("Incorrect data provided");
     }
@@ -84,16 +84,16 @@ function Campaign({ data, allUsers }) {
               placeholder="Start Date"
               id="startDate"
               type="text"
-              onFocus={(e) => {
+              onSelect={(e) => {
                 e.target.type = "date";
-                setMinEndDate(e.target.value);
               }}
               value={getDate.startDate}
-              onChange={(e) =>
+              onChange={(e) => {
+                setMinEndDate(e.target.value);
                 setDate((date) => {
                   return { ...date, startDate: e.target.value };
-                })
-              }
+                });
+              }}
             />
           </div>
           <div className="search-items-date">
@@ -101,7 +101,7 @@ function Campaign({ data, allUsers }) {
               placeholder="End Date"
               id="endDate"
               type="text"
-              onFocus={(e) => {
+              onSelect={(e) => {
                 e.target.type = "date";
               }}
               value={getDate.endDate}
@@ -149,7 +149,7 @@ function Campaign({ data, allUsers }) {
       </div>
     </div>
   );
-}
+};
 
 export const RedLabel = () => {
   return (
