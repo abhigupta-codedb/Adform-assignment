@@ -11,7 +11,8 @@ import { GetApiStatus, GetAllUsers } from "./hooks/hooks";
 const App = () => {
   const dispatch = useDispatch();
   const status = GetApiStatus();
-  const renderData = normalizeTestData(GetAllUsers(), mockData);
+  const allUsers = GetAllUsers();
+  const renderData = normalizeTestData(allUsers, mockData);
 
   useEffect(() => {
     dispatch(fetchData());
@@ -33,7 +34,7 @@ const App = () => {
         {status === STATUS.LOADING ? (
           <h1>Loading....</h1>
         ) : (
-          <Campaign data={renderData} />
+          <Campaign data={renderData} allUsers={allUsers} />
         )}
       </div>
     </div>
