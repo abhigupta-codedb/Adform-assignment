@@ -2,14 +2,25 @@ import React, { useState } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import { getFormattedDate, formatCash } from "../constant/helpers";
+import { normalizeTestData } from "../store/selectors/selectors";
 
-function Campaign({ data, dateFilter }) {
+function Campaign({ data, allUsers }) {
   const currDate = moment(new Date()).format("MM/DD/YYYY");
+  const [getData, setData] = useState(data);
   const [showTable, setTable] = useState(true);
   const [getName, setName] = useState("");
   const [getDate, setDate] = useState({ startDate: "", endDate: "" });
 
-  const filteredData = data
+  // Global Method
+  window.AddCampaigns = function (campaignData) {
+    if (!campaignData) {
+      throw new Error("Incorrect data provided");
+    }
+    const renderData = normalizeTestData(allUsers, campaignData);
+    setData([...getData, ...renderData]);
+  };
+
+  const filteredData = getData
     .filter(
       (data) => data.name.toLowerCase().indexOf(getName.toLowerCase()) >= 0
     )
@@ -32,17 +43,30 @@ function Campaign({ data, dateFilter }) {
       );
     });
 
-  const ApplyDate = () => {
-    const startDate = getDate.startDate;
-    const endDate = getDate.endDate;
+  const applyDate = () => {
+    let startDate = getDate.startDate;
+    let endDate = getDate.endDate;
 
     if (!startDate || !endDate) {
       alert("Enter start/end date correctly");
     } else if (new Date(startDate) > new Date(endDate)) {
       setTable(false);
     } else {
-      dateFilter(getFormattedDate(startDate), getFormattedDate(endDate));
+      startDate = getFormattedDate(startDate);
+      endDate = getFormattedDate(endDate);
+      setData(
+        getData.filter(
+          (data) =>
+            new Date(data.startDate) >= new Date(startDate) &&
+            new Date(data.endDate) <= new Date(endDate)
+        )
+      );
     }
+  };
+
+  const resetDate = () => {
+    setData(data);
+    setDate({ startDate: "", endDate: "" });
   };
 
   const setMinEndDate = (date) => {
@@ -89,7 +113,11 @@ function Campaign({ data, dateFilter }) {
             />
           </div>
           <div className="search-items-date">
-            <button onClick={ApplyDate}>Apply Date</button>
+            <button onClick={applyDate}>Apply Date</button>
+          </div>
+
+          <div className="search-items-date">
+            <button onClick={resetDate}>Reset Date</button>
           </div>
 
           <div className="search-items-name">
@@ -151,7 +179,6 @@ Campaign.propTypes = {
       Budget: PropTypes.number,
     })
   ).isRequired,
-  dateFilter: PropTypes.func.isRequired,
 };
 
 export default Campaign;
