@@ -6,10 +6,11 @@ import { normalizeTestData } from "../store/selectors/selectors";
 
 const Campaign = ({ data, allUsers }) => {
   const currDate = moment().format("MM/DD/YYYY");
-  const [getData, setData] = useState(data);
+  const renderData = normalizeTestData(allUsers, data);
   const [showTable, setTable] = useState(true);
   const [getName, setName] = useState("");
   const [getDate, setDate] = useState({ startDate: "", endDate: "" });
+  const [getData, setData] = useState(renderData);
 
   // Global Method
   window.AddCampaigns = (campaignData) => {
@@ -20,24 +21,30 @@ const Campaign = ({ data, allUsers }) => {
     setData([...getData, ...renderData]);
   };
 
-  const filteredData = getData
-    .filter(
-      (data) => data.name.toLowerCase().indexOf(getName.toLowerCase()) >= 0
-    )
-    .map(({ name, username, startDate, endDate, Budget } = data, key) => {
-      return (
-        <tr key={key}>
-          <td>{name}</td>
-          <td>{username}</td>
-          <td>{startDate}</td>
-          <td>{endDate}</td>
-          <td>
-            {moment(endDate).isAfter(currDate) ? <GreenLabel /> : <RedLabel />}
-          </td>
-          <td>{formatCash(Budget)} USD</td>
-        </tr>
-      );
-    });
+  const filteredData =
+    getData.length > 0 &&
+    getData
+      .filter(
+        (data) => data.name.toLowerCase().indexOf(getName.toLowerCase()) >= 0
+      )
+      .map(({ name, username, startDate, endDate, Budget } = data, key) => {
+        return (
+          <tr key={key}>
+            <td>{name}</td>
+            <td>{username}</td>
+            <td>{startDate}</td>
+            <td>{endDate}</td>
+            <td>
+              {moment(endDate).isAfter(currDate) ? (
+                <GreenLabel />
+              ) : (
+                <RedLabel />
+              )}
+            </td>
+            <td>{formatCash(Budget)} USD</td>
+          </tr>
+        );
+      });
 
   const applyDate = () => {
     let startDate = moment(getDate.startDate).format("MM/DD/YYYY");

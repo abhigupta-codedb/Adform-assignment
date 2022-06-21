@@ -5,14 +5,12 @@ import { useDispatch } from "react-redux";
 import { fetchData } from "./store/Thunk/thunk";
 import { STATUS } from "./helpers/helpers";
 import { mockData } from "./helpers/mockData";
-import { normalizeTestData } from "./store/selectors/selectors";
 import { GetApiStatus, GetAllUsers } from "./hooks/hooks";
 
 const App = () => {
   const dispatch = useDispatch();
   const status = GetApiStatus();
   const allUsers = GetAllUsers();
-  const renderData = normalizeTestData(allUsers, mockData);
 
   useEffect(() => {
     dispatch(fetchData());
@@ -34,7 +32,7 @@ const App = () => {
         {status === STATUS.LOADING ? (
           <h1>Loading....</h1>
         ) : (
-          <Campaign data={renderData} allUsers={allUsers} />
+          <Campaign data={mockData} allUsers={allUsers} />
         )}
       </div>
     </div>
