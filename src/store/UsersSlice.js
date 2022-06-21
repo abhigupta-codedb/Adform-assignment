@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../helpers/helpers";
 
-const CampaignSlice = createSlice({
-  name: "CampaignSlice",
+const UsersSlice = createSlice({
+  name: "UsersSlice",
   initialState: {
     data: [],
     status: STATUS.IDLE,
   },
   reducers: {
-    setCampaign(state, action) {
+    setUsers(state, action) {
       state.data = action.payload;
     },
     setStatus(state, action) {
@@ -17,6 +17,6 @@ const CampaignSlice = createSlice({
   },
 });
 
-export const { setCampaign, setStatus } = CampaignSlice.actions;
+export const { setUsers, setStatus } = UsersSlice.actions;
 
-export default CampaignSlice.reducer;
+export default UsersSlice.reducer;

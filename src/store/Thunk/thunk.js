@@ -1,4 +1,4 @@
-import { setStatus, setCampaign } from "../campaignSlice";
+import { setStatus, setUsers } from "../UsersSlice";
 import { STATUS } from "../../helpers/helpers";
 
 export const fetchData = () => {
@@ -7,7 +7,7 @@ export const fetchData = () => {
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/users");
       const data = await res.json();
-      dispatch(setCampaign(data));
+      dispatch(setUsers(data));
       dispatch(setStatus(STATUS.IDLE));
     } catch (err) {
       dispatch(setStatus(STATUS.ERROR));
