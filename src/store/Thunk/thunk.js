@@ -1,4 +1,4 @@
-import { setStatus, setUsers } from "../UsersSlice";
+import { setStatus, setUsers } from "../Slices/UsersSlice";
 import { STATUS } from "../../helpers/helpers";
 
 export const fetchData = () => {

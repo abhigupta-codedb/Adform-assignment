@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { STATUS } from "../helpers/helpers";
+import { STATUS } from "../../helpers/helpers";
 
 const UsersSlice = createSlice({
   name: "UsersSlice",
