@@ -91,9 +91,7 @@ const Campaign = ({ data, allUsers }) => {
               value={getDate.startDate}
               onChange={(e) => {
                 setMinEndDate(e.target.value);
-                setDate((date) => {
-                  return { ...date, startDate: e.target.value };
-                });
+                setDate((date) => ({ ...date, startDate: e.target.value }));
               }}
             />
           </div>
@@ -107,9 +105,7 @@ const Campaign = ({ data, allUsers }) => {
               }}
               value={getDate.endDate}
               onChange={(e) =>
-                setDate((date) => {
-                  return { ...date, endDate: e.target.value };
-                })
+                setDate((date) => ({ ...date, endDate: e.target.value }))
               }
             />
           </div>
