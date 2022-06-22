@@ -10,10 +10,7 @@ export const GetApiStatus = () => {
 export const GetAllUsers = () => {
   const allUsers = createSelector(
     (state) => state.users.data,
-    (data) =>
-      data.map((user) => {
-        return { id: user.id, userName: user.username };
-      })
+    (data) => data.map(({ id, username }) => ({ id, username }))
   );
 
   return useSelector(allUsers);

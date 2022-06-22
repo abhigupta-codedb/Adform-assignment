@@ -27,7 +27,7 @@ const Campaign = ({ data, allUsers }) => {
       .filter(
         (data) => data.name.toLowerCase().indexOf(getName.toLowerCase()) >= 0
       )
-      .map(({ name, username, startDate, endDate, Budget } = data, key) => {
+      .map(({ name, username, startDate, endDate, Budget }, key) => {
         return (
           <tr key={key}>
             <td>{name}</td>

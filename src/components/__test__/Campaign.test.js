@@ -25,11 +25,11 @@ const mockData = [
 const allUsers = [
   {
     id: 1,
-    userName: "Bret",
+    username: "Bret",
   },
   {
     id: 2,
-    userName: "Antonette",
+    username: "Antonette",
   },
 ];
 
