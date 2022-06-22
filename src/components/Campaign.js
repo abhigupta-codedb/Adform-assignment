@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import { formatCash } from "../helpers/helpers";
@@ -6,7 +6,10 @@ import { normalizeTestData } from "../store/selectors/selectors";
 
 const Campaign = ({ data, allUsers }) => {
   const currDate = moment().format("MM/DD/YYYY");
-  const renderData = normalizeTestData(allUsers, data);
+  const renderData = useMemo(
+    () => normalizeTestData(allUsers, data),
+    [data, allUsers]
+  );
   const [showTable, setTable] = useState(true);
   const [getName, setName] = useState("");
   const [getDate, setDate] = useState({ startDate: "", endDate: "" });
